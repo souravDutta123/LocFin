@@ -68,25 +68,32 @@ class UserLocationDashboard extends React.Component {
     this.setState({currentPlace : selectedPlace,searchResult});
 
   }
+  trial(place,token,that){
+    console.log('now');
+    axios({
+      method : 'post',
+      url : '/history/locationhistory',
+      data : place,
+      headers : {authorization : 'JWT '+token}
+    })
+    .then(function(response){
+      document.getElementById('save-search-location-button').classList.remove('rotate');
+      if(!response.data.success){
+        that.setState({searchResult : place});
+      }
+    })
+    .catch(function(err){
+
+    })
+  }
   saveToHistory(){
     const place = this.state.searchResult;
     const that = this;
     const token = localStorage.getItem('locfin') || '';
-    if(!(Object.keys(place).length === 0 && place.constructor === Object)){
-      axios({
-        method : 'post',
-        url : '/history/locationhistory',
-        data : place,
-        headers : {authorization : 'JWT '+token}
-      })
-      .then(function(response){
-        if(!response.data.success){
-          that.setState({searchResult : place});
-        }
-      })
-      .catch(function(err){
 
-      });
+    if(!(Object.keys(place).length === 0 && place.constructor() === Object)){
+      document.getElementById('save-search-location-button').classList.add('rotate');
+      setTimeout(function(){that.trial(place,token,that)},5000);
     }
     this.setState({searchResult : {}});
   }
@@ -121,7 +128,7 @@ class UserLocationDashboard extends React.Component {
             <Col xs = {12} sm = {12} md = {8} lg = {8} xl = {8}>
               <div>
                 <LocationSearchBox onPlaceChange = {this.onPlaceChange.bind(this)} map = {this.state.map}
-                width = {this.state.width}/>
+                width = {this.state.width} saveLocation = {this.saveToHistory.bind(this)}/>
               </div>
             </Col>
           </Row>

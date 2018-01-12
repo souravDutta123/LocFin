@@ -77,6 +77,19 @@
           overflow-x : hidden;
         }
 
+
+        .rotate {
+          -moz-animation: spinoffPulse 1s infinite linear;
+          -webkit-animation: spinoffPulse 1s infinite linear;
+        }
+        @-moz-keyframes spinoffPulse {
+          0% { -moz-transform:rotate(0deg); }
+	        100% { -moz-transform:rotate(360deg);  }
+        }
+        @-webkit-keyframes spinoffPulse {
+          0% { -webkit-transform:rotate(0deg); }
+	        100% { -webkit-transform:rotate(360deg); }
+        }
       </style>
   </head>
   <body style="overflow:hidden" >

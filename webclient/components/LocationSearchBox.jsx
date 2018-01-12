@@ -55,7 +55,8 @@ class LocationSearchBox extends React.Component {
           onChange = {this.handleLocationChange.bind(this)}
           value = {this.state.searchedLocation}
         />
-        <FloatingActionButton mini={true} backgroundColor = {pink500}>
+        <FloatingActionButton mini={true} backgroundColor = {pink500} className = ''
+        onClick = {this.props.saveLocation.bind(this)} id ='save-search-location-button' >
           <FontIcon className = 'material-icons'>done</FontIcon>
         </FloatingActionButton>
 
