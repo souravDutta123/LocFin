@@ -1,5 +1,6 @@
 import React from 'react';
 import {Link,withRouter} from 'react-router-dom';
+import {Container,Row,Col,Visible,Hidden} from 'react-grid-system';
 import axios from 'axios';
 import Paper from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
@@ -7,50 +8,6 @@ import RaisedButton from 'material-ui/RaisedButton';
 import Subheader from 'material-ui/Subheader';
 
 import {teal300,cyan300,pink500,pink50,pink300} from 'material-ui/styles/colors';
-
-const styles = {
-  paperStyle : {
-    marginTop : '30px',
-    width : 'fit-content',
-    minWidth : '400px',
-    marginLeft : 'auto',
-    marginRight : 'auto',
-    paddingBottom : '10px',
-    backgroundColor : pink50,
-    opacity : '1',
-    borderRadius : '10px'
-  },
-  subheaderStyle : {
-    height : '100px',
-    textAlign : 'center',
-    backgroundColor : teal300,
-    backgroundImage : `url('../images/login_header_background.jpg')`,
-    backgroundSize : 'cover',
-    paddingTop : '30px'
-  },
-  textFieldStyle : {
-
-  },
-  floatingLabelStyle : {
-    color : pink300
-  },
-  underlineStyle: {
-    borderColor : pink300
-  },
-  textFieldDivStyle : {
-    textAlign : 'center'
-  },
-  loginButtonStyle : {
-    marginLeft : 'auto',
-    marginRight : 'auto'
-  },
-  signInTextStyle : {
-    fontSize : '30px',
-    fontStyle : 'italic',
-    fontWeight : 600,
-    color : '#FFF'
-  }
-}
 
 class Login extends React.Component {
   constructor(props){
@@ -70,6 +27,69 @@ class Login extends React.Component {
       },
       errorMessage : '',
       submitDisabled : true
+    }
+    this.styles = {
+      paperStyle : {
+        width : '100%',
+        marginLeft : 'auto',
+        marginRight : 'auto',
+        paddingBottom : '10px',
+        backgroundColor : pink50,
+        opacity : '1',
+        borderRadius : '10px'
+      },
+      paperStyleSmall : {
+        height : window.innerHeight,
+        width : '100%',
+        marginLeft : 'auto',
+        marginRight : 'auto',
+        paddingBottom : '10px',
+        backgroundColor : pink50,
+        opacity : '1',
+        borderRadius : '10px'
+      },
+      subheaderStyle : {
+        height : '100px',
+        textAlign : 'center',
+        backgroundColor : teal300,
+        backgroundImage : `url('../images/login_header_background.jpg')`,
+        backgroundSize : 'cover',
+        paddingTop : '30px'
+      },
+      subheaderStyleSmall : {
+        height : '100px',
+        textAlign : 'center',
+        backgroundColor : teal300,
+        backgroundImage : `url('../images/login_header_background.jpg')`,
+        backgroundSize : 'cover',
+        paddingTop : '30px',
+        marginBottom : '20%',
+      },
+      textFieldStyle : {
+
+      },
+      floatingLabelStyle : {
+        color : pink300
+      },
+      underlineStyle: {
+        borderColor : pink300
+      },
+      textFieldDivStyle : {
+        textAlign : 'center'
+      },
+      loginButtonStyle : {
+        marginLeft : 'auto',
+        marginRight : 'auto'
+      },
+      signInTextStyle : {
+        fontSize : '30px',
+        fontStyle : 'italic',
+        fontWeight : 600,
+        color : '#FFF'
+      },
+      containerStyle : {
+        padding : '0px',
+      }
     }
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleLogin = this.handleLogin.bind(this);
@@ -128,47 +148,108 @@ class Login extends React.Component {
   }
   render(){
     return (
-      <Paper style = {styles.paperStyle}>
-        <Subheader style = {styles.subheaderStyle}><span style = {styles.signInTextStyle}>LocFin</span></Subheader>
-        <div style = {styles.textFieldDivStyle}>
-          <TextField
-            floatingLabelText = 'Email Id'
-            errorText = {this.state.error.email}
-            floatingLabelStyle = {styles.floatingLabelStyle}
-            underlineStyle = {styles.underlineStyle}
-            underlineFocusStyle = {styles.underlineStyle}
-            name = 'email'
-            value = {this.state.loginData.email}
-            onChange = {this.handleInputChange}
-          />
-        </div>
-        <div style = {styles.textFieldDivStyle}>
-          <TextField
-            floatingLabelText = 'Password'
-            errorText = {this.state.error.password}
-            type = 'password'
-            floatingLabelStyle = {styles.floatingLabelStyle}
-            underlineStyle = {styles.underlineStyle}
-            underlineFocusStyle = {styles.underlineStyle}
-            name = 'password'
-            value = {this.state.loginData.password}
-            onChange = {this.handleInputChange}
-          />
-        </div>
-        <div style = {styles.textFieldDivStyle}>
-          <RaisedButton
-            label = 'Sign In'
-            backgroundColor = {pink300}
-            labelColor = '#FFF'
-            disabled = {this.state.submitDisabled}
-            onClick = {this.handleLogin}
-          />
-        </div>
-        <br/>
-        <div style = {styles.textFieldDivStyle}>
-          <Link onClick = {this.props.goToRegister} to = '/'>Create an account?</Link>
-        </div>
-      </Paper>
+      <div>
+      <Hidden xs sm md>
+      <Container fluid>
+        <Row>
+          <Col md = {2} lg = {4} xl = {4}></Col>
+          <Col xs = {12} sm = {12} md = {8} lg = {4} xl = {4}>
+          <Paper style = {this.styles.paperStyle}>
+            <Subheader style = {this.styles.subheaderStyle}><span style = {this.styles.signInTextStyle}>LocFin</span></Subheader>
+            <div style = {this.styles.textFieldDivStyle}>
+              <TextField
+                floatingLabelText = 'Email Id'
+                errorText = {this.state.error.email}
+                floatingLabelStyle = {this.styles.floatingLabelStyle}
+                underlineStyle = {this.styles.underlineStyle}
+                underlineFocusStyle = {this.styles.underlineStyle}
+                name = 'email'
+                value = {this.state.loginData.email}
+                onChange = {this.handleInputChange}
+              />
+            </div>
+            <div style = {this.styles.textFieldDivStyle}>
+              <TextField
+                floatingLabelText = 'Password'
+                errorText = {this.state.error.password}
+                type = 'password'
+                floatingLabelStyle = {this.styles.floatingLabelStyle}
+                underlineStyle = {this.styles.underlineStyle}
+                underlineFocusStyle = {this.styles.underlineStyle}
+                name = 'password'
+                value = {this.state.loginData.password}
+                onChange = {this.handleInputChange}
+              />
+            </div>
+            <div style = {this.styles.textFieldDivStyle}>
+              <RaisedButton
+                label = 'Sign In'
+                backgroundColor = {pink300}
+                labelColor = '#FFF'
+                disabled = {this.state.submitDisabled}
+                onClick = {this.handleLogin}
+              />
+            </div>
+            <br/>
+            <div style = {this.styles.textFieldDivStyle}>
+              <Link onClick = {this.props.goToRegister} to = '/'>Create an account?</Link>
+            </div>
+          </Paper>
+          </Col>
+        </Row>
+      </Container>
+      </Hidden>
+      <Hidden lg xl>
+      <Container fluid style = {{padding : '0px'}}>
+        <Row>
+          <Col md = {2} lg = {4} xl = {4}></Col>
+          <Col xs = {12} sm = {12} md = {8} lg = {4} xl = {4}>
+          <Paper style = {this.styles.paperStyleSmall}>
+            <Subheader style = {this.styles.subheaderStyleSmall}><span style = {this.styles.signInTextStyle}>LocFin</span></Subheader>
+            <div style = {this.styles.textFieldDivStyle}>
+              <TextField
+                floatingLabelText = 'Email Id'
+                errorText = {this.state.error.email}
+                floatingLabelStyle = {this.styles.floatingLabelStyle}
+                underlineStyle = {this.styles.underlineStyle}
+                underlineFocusStyle = {this.styles.underlineStyle}
+                name = 'email'
+                value = {this.state.loginData.email}
+                onChange = {this.handleInputChange}
+              />
+            </div>
+            <div style = {this.styles.textFieldDivStyle}>
+              <TextField
+                floatingLabelText = 'Password'
+                errorText = {this.state.error.password}
+                type = 'password'
+                floatingLabelStyle = {this.styles.floatingLabelStyle}
+                underlineStyle = {this.styles.underlineStyle}
+                underlineFocusStyle = {this.styles.underlineStyle}
+                name = 'password'
+                value = {this.state.loginData.password}
+                onChange = {this.handleInputChange}
+              />
+            </div>
+            <div style = {this.styles.textFieldDivStyle}>
+              <RaisedButton
+                label = 'Sign In'
+                backgroundColor = {pink300}
+                labelColor = '#FFF'
+                disabled = {this.state.submitDisabled}
+                onClick = {this.handleLogin}
+              />
+            </div>
+            <br/>
+            <div style = {this.styles.textFieldDivStyle}>
+              <Link onClick = {this.props.goToRegister} to = '/'>Create an account?</Link>
+            </div>
+          </Paper>
+          </Col>
+        </Row>
+      </Container>
+      </Hidden>
+      </div>
     )
   }
 }

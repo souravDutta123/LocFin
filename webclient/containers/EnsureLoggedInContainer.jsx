@@ -20,8 +20,8 @@ class EnsureLoggedInContainer extends React.Component {
       headers : {authorization : 'JWT '+token}
     })
     .then(function(response){
-      if(response.status !== 200){
-        that.props.history.push('/');
+      if(!response.data.success){
+        that.setState({success : false});
       }else{
         that.setState({success : true});
       }

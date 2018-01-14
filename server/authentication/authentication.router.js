@@ -7,17 +7,17 @@ router.post('/authenticate',function(req,res){
     authController.authenticateUser(req)
     .then(function(user){
       if(!user){
-        res.status(401).send({message : 'Login required'});
+        res.status(200).send({success : false, message : 'Login required'});
       }else{
-        res.status(200).json({user : user});
+        res.status(200).json({success : true, user : user});
       }
     },function(err){
       console.error(err);
-      res.status(500).send({message : 'Internal server error..'})
+      res.status(200).send({success : false, message : 'Login required'});
     })
   } catch (e) {
     console.error(e);
-    res.status(500).send({message : 'Internal server error..'})
+    res.status(200).send({success : false, message : 'Login required'});
   } finally {
 
   }
