@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt-nodejs');
 const jwtDecode = require('jwt-decode');
 const jwtConfig = require('../../config/config.js').jwtConfig;
 const User = require('../models/User');
-
+const salt = bcrypt.genSaltSync(10);
 
 const authenticateUser = function(req){
   try {
@@ -56,7 +56,7 @@ const registerUser = function(userToReg){
                 let newUser = new User({
                   fullname : userToReg.fullname,
                   email : userToReg.email,
-                  hash_password : bcrypt.hashSync(userToReg.password, 10)
+                  hash_password : bcrypt.hashSync(userToReg.password, salt)
                 })
                 newUser.save(function(err,user){
                   if(err){
